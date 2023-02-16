@@ -88,7 +88,7 @@
 
           <ul class="menu-inner py-1">
             <!-- Dashboard -->
-            <li class="menu-item active">
+            <li class="menu-item @yield('dashboard')">
               <a href="{{ route('admin-dashboard') }}" class="menu-link">
                 <i class="menu-icon tf-icons bx bx-home-circle"></i>
                 <div data-i18n="Analytics">Dashboard</div>
@@ -99,13 +99,13 @@
             <li class="menu-header small text-uppercase">
               <span class="menu-header-text">Printer Brands</span>
             </li>
-            <li class="menu-item">
+            <li class="menu-item  @yield('all-brands')">
               <a href="{{ route('all-brands') }}" class="menu-link">
                 <i class="menu-icon tf-icons bx bx-dock-top"></i>
                 <div data-i18n="Brands">All Brands</div>
               </a>
             </li>
-            <li class="menu-item">
+            <li class="menu-item @yield('add-brands')">
               <a href="{{ route('add-brand') }}" class="menu-link">
                 <i class="menu-icon tf-icons bx bx-add-to-queue"></i>
                 <div data-i18n="Brands">Add Brand</div>
@@ -116,13 +116,13 @@
             <!-- Components -->
             <li class="menu-header small text-uppercase"><span class="menu-header-text">Printer Product</span></li>
             <!-- Cards -->
-            <li class="menu-item">
+            <li class="menu-item @yield('all-products') ">
               <a href="{{ route('all-products') }}" class="menu-link">
                 <i class="menu-icon tf-icons bx bx-collection"></i>
                 <div data-i18n="Basic">All Products</div>
               </a>
             </li>
-            <li class="menu-item">
+            <li class="menu-item @yield('add-products')">
               <a href="{{ route('add-product') }}" class="menu-link">
                 <i class="menu-icon tf-icons bx bx-add-to-queue"></i>
                 <div data-i18n="Basic">Add Product</div>
@@ -130,13 +130,13 @@
             </li>
             <li class="menu-header small text-uppercase"><span class="menu-header-text">Order Data</span></li>
             <!-- Cards -->
-            <li class="menu-item">
+            <li class="menu-item @yield('completed-orders')">
               <a href="{{ route('completed-orders') }}" class="menu-link">
                 <i class="menu-icon tf-icons bx bx-archive-in"></i>
                 <div data-i18n="Basic">Completed Order</div>
               </a>
             </li>
-            <li class="menu-item">
+            <li class="menu-item @yield('order-confirmations')">
               <a href="{{ route('order-confirmations') }}" class="menu-link">
                 <i class="menu-icon tf-icons bx bx-user-check"></i>
                 <div data-i18n="Basic">Order Confirmation</div>
@@ -234,16 +234,17 @@
                     <li>
                       <div class="dropdown-divider"></div>
                     </li>
-                    <li>
-                       <form method="POST" action="{{ route('logout') }}" class="dropdown-item"  style="cursor:pointer; color:#F55050;">
-                        @csrf
+                    <li class="dropdown-item">
+                      <form method="POST" action="{{ route('logout') }}">
+                            @csrf
+                      <span class="d-flex align-items-center align-middle">
+                      
+                      <x-dropdown-link :href="route('logout')" onclick="event.preventDefault(); this.closest('form').submit();" style="color :#F55050">
                         <i class="bx bx-power-off me-2"></i>
-                        <x-responsive-nav-link :
-                        class="align-middle"
-                        onclick="event.preventDefault();
-                        this.closest('form').submit();">
-                            {{ __('Log Out') }}
-                        </x-responsive-nav-link> 
+                        <span class="flex-grow-1 align-middle" >Log Out</span>
+                      </x-dropdown-link>
+                      </span>
+                      </form>
                     </li>
                   </ul>
                 </li>

@@ -34,6 +34,10 @@ Route::middleware(['auth', 'role:admin'])->group(function () {
     Route::controller(BrandsController::class)->group(function(){
         Route::get('/admin/all-brands', 'Index')->name('all-brands');
         Route::get('/admin/add-brand', 'AddBrand')->name('add-brand');
+        Route::post('/admin/store-brand', 'StoreBrand')->name('store-brand');
+        Route::get('/admin/edit-brand/{id}', 'EditBrand' )->name('edit-brand');
+        Route::post('/admin/update-brand', 'UpdateBrand')->name('update-brand');
+        Route::get('/admin/delete-brand/{id}', 'DeleteBrand' )->name('delete-brand');
     });
 
     Route::controller(ProductsController::class)->group(function(){

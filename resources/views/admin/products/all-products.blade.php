@@ -3,6 +3,7 @@
 @section('page_title')
 Admin | All Products
 @endsection
+@section('all-products', 'active')
 
 @section('content')
 <div class="container-xxl flex-grow-1 container-p-y">
