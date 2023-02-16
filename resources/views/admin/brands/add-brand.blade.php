@@ -10,21 +10,21 @@ Admin | Brands Management
 <h4 class="fw-bold py-3 mb-4"><span class="text-muted fw-light">Page/</span> Add Printer Brands</h4>
 <!-- Basic Layout -->
 <div class="col-xxl">
-    <div class="card mb-4">
-      <div class="card-header d-flex align-items-center justify-content-between">
-        <h5 class="mb-0">New Printer Brand</h5>
-        <small class="text-muted float-end">Input Valid Brand</small>
-      </div>
-      <div class="card-body">
-              @if ($errors->any())
-                  <div class="alert alert-danger">
-                      <ul>
-                          @foreach ($errors->all() as $error)
-                              <li>{{ $error }}</li>
-                          @endforeach
-                      </ul>
-                  </div>
-              @endif
+  <div class="card mb-4">
+    <div class="card-header d-flex align-items-center justify-content-between">
+      <h5 class="mb-0">New Printer Brand</h5>
+      <small class="text-muted float-end">Input Valid Brand</small>
+    </div>
+    <div class="card-body">
+        @if ($errors->any())
+                          <div class="alert alert-danger">
+                              <ul>
+                                  @foreach ($errors->all() as $error)
+                                      <li>{{ $error }}</li>
+                                  @endforeach
+                              </ul>
+                          </div>
+                      @endif
         <form action="{{ route('store-brand') }}" method="POST">
           @csrf
           <div class="row mb-3">

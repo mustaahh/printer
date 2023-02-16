@@ -56,6 +56,8 @@
 
     <link rel="stylesheet" href="{{ asset('dashboard/assets/vendor/libs/apex-charts/apex-charts.css') }}" />
 
+    <link rel="stylesheet" href="https://cdn.datatables.net/1.13.2/css/jquery.dataTables.min.css">
+
     <!-- Page CSS -->
 
     <!-- Helpers -->
@@ -128,6 +130,21 @@
                 <div data-i18n="Basic">Add Product</div>
               </a>
             </li>
+            <!-- Components -->
+            <li class="menu-header small text-uppercase"><span class="menu-header-text">Printer Stocks</span></li>
+            <!-- Cards -->
+            <li class="menu-item @yield('all-stocks') ">
+              <a href="{{ route('all-stocks') }}" class="menu-link">
+                <i class="menu-icon tf-icons bx bx-data"></i>
+                <div data-i18n="Basic">All Stocks</div>
+              </a>
+            </li>
+            <li class="menu-item @yield('add-stocks')">
+              <a href="{{ route('add-stocks') }}" class="menu-link">
+                <i class="menu-icon tf-icons bx bx-add-to-queue"></i>
+                <div data-i18n="Basic">Add Stocks</div>
+              </a>
+            </li>
             <li class="menu-header small text-uppercase"><span class="menu-header-text">Order Data</span></li>
             <!-- Cards -->
             <li class="menu-item @yield('completed-orders')">
@@ -175,6 +192,7 @@
                     class="form-control border-0 shadow-none"
                     placeholder="Search..."
                     aria-label="Search..."
+                    id="searchbar"
                   />
                 </div>
               </div>
@@ -193,7 +211,7 @@
                   </a>
                   <ul class="dropdown-menu dropdown-menu-end">
                     <li>
-                      <a class="dropdown-item" href="#">
+                      <a class="dropdown-item" href="{{ route('profile.edit') }}">
                         <div class="d-flex">
                           <div class="flex-shrink-0 me-3">
                             <div class="avatar avatar-online">
@@ -211,7 +229,7 @@
                       <div class="dropdown-divider"></div>
                     </li>
                     <li>
-                      <a class="dropdown-item" href="#">
+                      <a class="dropdown-item" href="{{ route('profile.edit') }}">
                         <i class="bx bx-user me-2"></i>
                         <span class="align-middle">My Profile</span>
                       </a>
@@ -299,5 +317,15 @@
 
     <!-- Place this tag in your head or just before your close body tag. -->
     <script async defer src="https://buttons.github.io/buttons.js"></script>
+    <script src="https://cdn.datatables.net/1.13.2/js/jquery.dataTables.min.js"></script>
+    <script type="text/javascript">
+      $(document).ready( function () {
+        $('.table').DataTable();
+        $('#searchbar').on('keyup', function () {
+          var table = $('.table').DataTable();
+          table.search(this.value).draw();
+        });
+        });
+    </script>
   </body>
 </html>

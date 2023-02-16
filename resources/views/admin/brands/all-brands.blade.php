@@ -10,14 +10,13 @@ Admin | All Brands
     <h4 class="fw-bold py-3 mb-4"><span class="text-muted fw-light">Page/</span> All Printer Brands</h4>
     <!-- Bootstrap Table with Header - Light -->
     <div class="card">
-        <h5 class="card-header">Avaliable Printer Brand</h5>
-        @if ( session()-> has('message') )
-        <div class="alert alert-success">
-          {{ session() -> get('message') }}
-        </div>
-          
-        @endif
-        <div class="table-responsive">
+      <h5 class="card-header">Avaliable Printer Brand</h5>
+      @if ( session()-> has('message') )
+         <div class="alert alert-success">
+           {{ session() -> get('message') }}
+         </div>    
+       @endif
+        <div class="table-responsive m-4">
             <table class="table table-striped">
               <thead>
                 <tr>
@@ -38,13 +37,14 @@ Admin | All Brands
                   <td>{{ $loop->iteration }}</td>
                   <td>{{ $brand -> brand_name }}</td>
                   <td>{{ $brand -> product_count }}</td>
-                  <td>{{ $brand -> product_count }}</td>
+                  <td>{{ $brand -> stock_count }}</td>
                   <td>{{ $brand -> slug }}</td>
                   <td>
                     <a href="{{ route('edit-brand', $brand->id) }}" class="btn btn-primary">Edit</a>
                     <a href="{{ route('delete-brand', $brand->id) }}" class="btn btn-danger">Delete</a>
                   </td>
                 </tr>
+                {{-- style="background-color: #F55050;" --}}
                 
                 @endforeach
                     

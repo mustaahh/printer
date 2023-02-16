@@ -13,23 +13,18 @@ return new class extends Migration
      */
     public function up()
     {
-        Schema::create('products', function (Blueprint $table) {
+        Schema::create('stocks', function (Blueprint $table) {
             $table->id();
-            $table->string('product_name');
-            $table->BigInteger('brand_id');
-            $table->string('brand_name');
-            $table->BigInteger('stock_count')->default(0);
-            $table->string('slug');
+            // $table->string('product_name');
+            // $table->text('product_desc');
+            // $table->integer('price');
+            // $table->string('product_brand_name');
+            // $table->integer('product_brand_id');
+            // $table->string('product_img');
+            // $table->string('slug');
             $table->timestamps();
         });
-
-
     }
-
-
-
-
-
 
     /**
      * Reverse the migrations.
@@ -38,6 +33,6 @@ return new class extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('products');
+        Schema::dropIfExists('stocks');
     }
 };

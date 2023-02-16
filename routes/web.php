@@ -3,6 +3,7 @@
 use App\Http\Controllers\Admin\DashboardController;
 use App\Http\Controllers\Admin\BrandsController;
 use App\Http\Controllers\Admin\ProductsController;
+use App\Http\Controllers\Admin\StocksController;
 use App\Http\Controllers\Admin\OrdersController;
 use App\Http\Controllers\ProfileController;
 use Illuminate\Support\Facades\Route;
@@ -43,6 +44,16 @@ Route::middleware(['auth', 'role:admin'])->group(function () {
     Route::controller(ProductsController::class)->group(function(){
         Route::get('/admin/all-products', 'Index')->name('all-products');
         Route::get('/admin/add-product', 'AddProduct')->name('add-product');
+        Route::post('/admin/store-product', 'StoreProduct')->name('store-product');
+        Route::get('/admin/edit-product/{id}', 'EditProduct')->name('edit-product');
+        Route::get('/admin/delete-product/{id}', 'DeleteProduct')->name('delete-product');
+        Route::post('/admin/update-product', 'UpdateProduct')->name('update-product'); 
+    });
+
+    Route::controller(StocksController::class)->group(function(){
+        Route::get('/admin/all-stocks', 'Index')->name('all-stocks');
+        Route::get('/admin/add-stocks', 'AddStocks')->name('add-stocks');
+        
     });
     
     Route::controller(OrdersController::class)->group(function(){

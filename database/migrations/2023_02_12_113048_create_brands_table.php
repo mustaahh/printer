@@ -18,6 +18,7 @@ return new class extends Migration
             $table->string('brand_name');
             $table->string('slug');
             $table->integer('product_count')->default(0);
+            $table->integer('stock_count')->default(0);
             $table->timestamps();
         });
     }

@@ -10,8 +10,13 @@ Admin | All Products
     <h4 class="fw-bold py-3 mb-4"><span class="text-muted fw-light">Page/</span> All Printer Products</h4>
     <!-- Bootstrap Table with Header - Light -->
     <div class="card">
-        <h5 class="card-header">Avaliable Printer Stocks</h5>
-        <div class="table-responsive">
+        <h5 class="card-header">Avaliable Printer Products</h5>
+        @if ( session()-> has('message') ) 
+          <div class="alert alert-success">
+            {{ session() -> get('message') }}
+          </div>    
+        @endif
+        <div class="table-responsive m-4">
             <table class="table table-striped">
               <thead>
                 <tr>
@@ -23,16 +28,21 @@ Admin | All Products
                 </tr>
               </thead>
               <tbody>
+                @foreach ($products as $product)
+                  
+                
+                
                 <tr>
-                    <td>1</td>
-                    <td>Epson L210</td>
-                    <td>Epson</td>
-                    <td>240</td>
-                    <td>
-                        <a href="" class="btn btn-primary">Edit</a>
-                        <a href="" class="btn btn-danger">Delete</a>
-                    </td>
+                  <td>{{ $loop->iteration }}</td>
+                  <td>{{ $product->product_name }}</td>
+                  <td>{{ $product->brand_name }}</td>
+                  <td>{{ $product->stock_count }}</td>
+                  <td>
+                    <a href="{{ route('edit-product', $product->id) }}" class="btn btn-primary">Edit</a>
+                    <a href="{{ route('delete-product', $product->id) }}" class="btn btn-danger">Delete</a>
+                  </td>
                 </tr> 
+                @endforeach
               </tbody>
             </table>
           </div>
