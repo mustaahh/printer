@@ -5,6 +5,7 @@ use App\Http\Controllers\Admin\BrandsController;
 use App\Http\Controllers\Admin\ProductsController;
 use App\Http\Controllers\Admin\StocksController;
 use App\Http\Controllers\Admin\OrdersController;
+use App\Http\Controllers\User\HomeController;
 use App\Http\Controllers\ProfileController;
 use Illuminate\Support\Facades\Route;
 
@@ -23,13 +24,17 @@ Route::get('/', function () {
     return view('welcome');
 });
 
+
 Route::get('/dashboard', function () {
     return view('dashboard');
 })->middleware(['auth', 'role:user'])->name('dashboard'); 
 
 Route::middleware(['auth', 'role:admin'])->group(function () {
-    Route::controller(DashboardController::class)->group(function(){
+    Route::controller(DashboardController::class)->group(function() {
         Route::get('/admin/dashboard', 'Index')->name('admin-dashboard');
+    });
+    Route::controller(HomeController::class)->group(function() {
+        Route::get('/user', 'Index')->name('user-index');
     });
     
     Route::controller(BrandsController::class)->group(function(){
@@ -53,6 +58,12 @@ Route::middleware(['auth', 'role:admin'])->group(function () {
     Route::controller(StocksController::class)->group(function(){
         Route::get('/admin/all-stocks', 'Index')->name('all-stocks');
         Route::get('/admin/add-stocks', 'AddStocks')->name('add-stocks');
+        Route::post('/admin/store-stocks', 'StoreStocks')->name('store-stocks');
+        Route::get('/admin/edit-stock-image/{id}', 'EditStockImage')->name('edit-stock-image');
+        Route::post('/admin/update-stocks-image', 'UpdateStockImage')->name('update-stock-image');
+        Route::get('/admin/edit-stock/{id}', 'EditStock')->name('edit-stock');
+        Route::post('/admin/update-stocks', 'UpdateStock')->name('update-stock');
+        Route::get('/admin/delete-stock/{id}', 'DeleteStock')->name('delete-stock');
         
     });
     

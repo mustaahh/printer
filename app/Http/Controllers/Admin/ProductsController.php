@@ -48,7 +48,6 @@ class ProductsController extends Controller
         $product_info = Products::findOrFail($id);
 
         return view ('admin.products.edit-product', compact('product_info'));
-
     }
 
     public function UpdateProduct (Request $request) {
@@ -56,7 +55,7 @@ class ProductsController extends Controller
             'product_name' => 'required|unique:products',
 
         ]);
-
+        
         $product_id = $request->product_id;
 
         Products::findOrFail($product_id)->update([
@@ -74,9 +73,9 @@ class ProductsController extends Controller
         Brands::where('id', $brand_id)->decrement('product_count', 1);
 
         return redirect()->route('all-products')->with( 'message', 'Product Deleted Successfully!' );
-
-
     }
+
+
 
 
 

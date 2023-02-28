@@ -12,15 +12,16 @@ Admin | All Products
     <div class="card">
         <h5 class="card-header">Avaliable Printer Products</h5>
         @if ( session()-> has('message') ) 
-          <div class="alert alert-success">
+          <div class="alert alert-success alert-dismissible fade show">
             {{ session() -> get('message') }}
+            <button type="button" class="btn-close text-end" data-bs-dismiss="alert" aria-label="Close"></button>
           </div>    
         @endif
         <div class="table-responsive m-4">
             <table class="table table-striped">
               <thead>
                 <tr>
-                  <th>Id</th>
+                  <th>No</th>
                   <th>Product Name</th>
                   <th>Brand Name</th>
                   <th>Product Stock</th>

@@ -21,22 +21,22 @@ Admin | Stocks Management
               <form action="{{ route('store-product') }}" method="POST">
                 @csrf
                 <div class="row mb-3">
-                  <label class="col-sm-2 col-form-label" for="product_name">Product Name</label>
-                  <div class="col-sm-10">
-                    <input type="text" class="form-control" id="product_name" placeholder="Printer Name" name="product_name"/>
-                  </div>
-                </div>
-                <div class="row mb-3">
                   <label class="col-sm-2 col-form-label" for="brand_name">Printer Brand</label>
                   <div class="col-sm-10">
                     <div>
                         <select class="form-select" id="brand_id" name="brand_id" aria-label="Default select example">
-                          <option selected>Selected</option>
+                          <option selected>Select Brand</option>
                           @foreach ( $brands as $brand )
                           <option value="{{ $brand->id }}">{{ $brand->brand_name }}</option>
                           @endforeach
                         </select>
                       </div>
+                  </div>
+                </div>
+                <div class="row mb-3">
+                  <label class="col-sm-2 col-form-label" for="product_name">Product Name</label>
+                  <div class="col-sm-10">
+                    <input type="text" class="form-control" id="product_name" placeholder="Printer Name" name="product_name"/>
                   </div>
                 </div>
                          

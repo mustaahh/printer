@@ -11,17 +11,32 @@ return new class extends Migration
      *
      * @return void
      */
+    // $table->id();
+    //         $table->integer('stock_product_id');
+    //         $table->integer('quantity');
+    //         $table->text('stock_desc');
+    //         $table->integer('price');
+    //         $table->string('stock_brand_name');
+    //         $table->string('stock_product_name');
+    //         $table->integer('stock_brand_id');
+    //         $table->integer('stock_product_id');
+    //         $table->string('stock_img');
+    //         $table->string('slug');
+    //         $table->timestamps();
     public function up()
     {
         Schema::create('stocks', function (Blueprint $table) {
             $table->id();
-            // $table->string('product_name');
-            // $table->text('product_desc');
-            // $table->integer('price');
-            // $table->string('product_brand_name');
-            // $table->integer('product_brand_id');
-            // $table->string('product_img');
-            // $table->string('slug');
+            $table->BigInteger('brand_id');
+            $table->string('brand_name');
+            $table->BigInteger('product_id');
+            $table->string('product_name');
+            $table->BigInteger('price');
+            $table->Biginteger('product_count')->default(0);
+            $table->Biginteger('quantity')->default(0);
+            $table->BigInteger('stock_count')->default(0);
+            $table->text('stock_desc');
+            $table->string('stock_img');
             $table->timestamps();
         });
     }

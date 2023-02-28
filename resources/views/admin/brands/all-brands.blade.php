@@ -12,8 +12,9 @@ Admin | All Brands
     <div class="card">
       <h5 class="card-header">Avaliable Printer Brand</h5>
       @if ( session()-> has('message') )
-         <div class="alert alert-success">
+         <div class="alert alert-success alert-dismissible fade show">
            {{ session() -> get('message') }}
+           <button type="button" class="btn-close text-end" data-bs-dismiss="alert" aria-label="Close"></button>
          </div>    
        @endif
         <div class="table-responsive m-4">
