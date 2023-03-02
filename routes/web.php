@@ -6,6 +6,7 @@ use App\Http\Controllers\Admin\ProductsController;
 use App\Http\Controllers\Admin\StocksController;
 use App\Http\Controllers\Admin\OrdersController;
 use App\Http\Controllers\User\HomeController;
+use App\Http\Controllers\User\ClientController;
 use App\Http\Controllers\ProfileController;
 use Illuminate\Support\Facades\Route;
 
@@ -20,22 +21,32 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
-Route::get('/', function () {
-    return view('welcome');
+// Route::get('/', function () {
+//     return view('user_template.layouts.template');
+// });
+
+Route::controller(HomeController::class)->group(function () {
+    Route::get('/', 'Index')->name('home');
+});
+Route::controller(ClientController::class)->group(function () {
+    Route::get('/category', 'CategoryPage')->name('category');
+    Route::get('/single-product', 'SingleProduct')->name('single-product');
+    Route::get('/add-to-cart', 'AddToCart')->name('add-to-cart');
+    Route::get('/checkout', 'Checkout')->name('checkout');
+    Route::get('/user-profile', 'UserProfile')->name('user-profile');
 });
 
-
-Route::get('/dashboard', function () {
-    return view('dashboard');
-})->middleware(['auth', 'role:user'])->name('dashboard'); 
+// Route::get('/dashboard', function () {
+//     return view('dashboard');
+// })->middleware(['auth', 'role:user'])->name('dashboard'); 
 
 Route::middleware(['auth', 'role:admin'])->group(function () {
     Route::controller(DashboardController::class)->group(function() {
         Route::get('/admin/dashboard', 'Index')->name('admin-dashboard');
     });
-    Route::controller(HomeController::class)->group(function() {
-        Route::get('/user', 'Index')->name('user-index');
-    });
+    // Route::controller(HomeController::class)->group(function() {
+    //     Route::get('/home', 'Index')->name('user-index');
+    // });
     
     Route::controller(BrandsController::class)->group(function(){
         Route::get('/admin/all-brands', 'Index')->name('all-brands');
