@@ -12,13 +12,13 @@
         <div class="card">
             <h5 class="card-header">Avaliable Printer Stocks</h5>
             @if (session()->has('message'))
-                <div class="alert alert-success alert-dismissible fade show">
+                <div class="alert alert-success alert-dismissible fade show mx-3">
                     {{ session()->get('message') }}
                     <button type="button" class="btn-close text-end" data-bs-dismiss="alert" aria-label="Close"></button>
                 </div>
             @endif
             <div class="table-responsive m-4">
-                <table class="table table-striped">
+                <table class="table table-striped table-borderless">
                     <thead>
                         <tr>
                             <th>No</th>

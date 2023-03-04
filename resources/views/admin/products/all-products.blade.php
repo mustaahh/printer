@@ -11,14 +11,14 @@ Admin | All Products
     <!-- Bootstrap Table with Header - Light -->
     <div class="card">
         <h5 class="card-header">Avaliable Printer Products</h5>
-        @if ( session()-> has('message') ) 
-          <div class="alert alert-success alert-dismissible fade show">
+        @if ( session()-> has('message') )
+          <div class="alert alert-success alert-dismissible fade show mx-3">
             {{ session() -> get('message') }}
             <button type="button" class="btn-close text-end" data-bs-dismiss="alert" aria-label="Close"></button>
-          </div>    
+          </div>
         @endif
         <div class="table-responsive m-4">
-            <table class="table table-striped">
+            <table class="table table-striped table-borderless">
               <thead>
                 <tr>
                   <th>No</th>
@@ -30,9 +30,9 @@ Admin | All Products
               </thead>
               <tbody>
                 @foreach ($products as $product)
-                  
-                
-                
+
+
+
                 <tr>
                   <td>{{ $loop->iteration }}</td>
                   <td>{{ $product->product_name }}</td>
@@ -42,7 +42,7 @@ Admin | All Products
                     <a href="{{ route('edit-product', $product->id) }}" class="btn btn-primary">Edit</a>
                     <a href="{{ route('delete-product', $product->id) }}" class="btn btn-danger">Delete</a>
                   </td>
-                </tr> 
+                </tr>
                 @endforeach
               </tbody>
             </table>

@@ -28,6 +28,10 @@ class ProductsController extends Controller
             'brand_id' => 'required'
         ]);
 
+        if ($request->brand_id == 'default') {
+            return redirect()->route('add-product')->with( 'error', 'Please Select Valid Brand Name!' );
+        }
+
         $brand_id = $request->brand_id;
         $brand_name = Brands::where('id', $brand_id)->value('brand_name');
 
@@ -36,7 +40,7 @@ class ProductsController extends Controller
             'slug' => strtolower(str_replace(' ', '-', $request->product_name)),
             'brand_id' => $brand_id,
             'brand_name' => $brand_name
-        ]); 
+        ]);
 
         Brands::where('id', $brand_id)->increment('product_count', 1);
 
@@ -55,7 +59,7 @@ class ProductsController extends Controller
             'product_name' => 'required|unique:products',
 
         ]);
-        
+
         $product_id = $request->product_id;
 
         Products::findOrFail($product_id)->update([

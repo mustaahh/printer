@@ -27,18 +27,34 @@ use Illuminate\Support\Facades\Route;
 
 Route::controller(HomeController::class)->group(function () {
     Route::get('/', 'Index')->name('home');
+    Route::get('/#brands', 'Index')->name('home-brands');
+    Route::get('/#best-sellers', 'Index')->name('home-best-sellers');
+    Route::get('/#home-products', 'Index')->name('home-products');
 });
 Route::controller(ClientController::class)->group(function () {
-    Route::get('/category', 'CategoryPage')->name('category');
-    Route::get('/single-product', 'SingleProduct')->name('single-product');
+    Route::get('/brand/{id}/{slug}', 'BrandPage')->name('brand-page');
+    Route::get('/product-details/{id}/{slug}', 'SingleProduct')->name('single-product');
     Route::get('/add-to-cart', 'AddToCart')->name('add-to-cart');
     Route::get('/checkout', 'Checkout')->name('checkout');
     Route::get('/user-profile', 'UserProfile')->name('user-profile');
 });
 
-// Route::get('/dashboard', function () {
-//     return view('dashboard');
-// })->middleware(['auth', 'role:user'])->name('dashboard'); 
+Route::middleware(['auth', 'role:user'])->group(function () {
+    Route::controller(ClientController::class)->group(function () {
+    Route::get('/add-to-cart', 'AddToCart')->name('add-to-cart');
+    Route::post('/add-product-to-cart/{id}', 'AddProductToCart')->name('add-product-to-cart');
+    Route::get('/remove-cart-item/{id}', 'RemoveCartItem' )->name('remove-cart-item');
+    Route::get('/checkout', 'Checkout')->name('checkout');
+    Route::get('/user-profile', 'UserProfile')->name('user-profile');
+    Route::get('/user-profile/pending-orders', 'PendingOrders')->name('pending-orders');
+    Route::get('/user-profile/history', 'History')->name('history');
+    });
+    
+});
+
+Route::get('/dashboard', function () {
+    return view('dashboard');
+})->middleware(['auth', 'role:user'])->name('dashboard');
 
 Route::middleware(['auth', 'role:admin'])->group(function () {
     Route::controller(DashboardController::class)->group(function() {
@@ -47,7 +63,7 @@ Route::middleware(['auth', 'role:admin'])->group(function () {
     // Route::controller(HomeController::class)->group(function() {
     //     Route::get('/home', 'Index')->name('user-index');
     // });
-    
+
     Route::controller(BrandsController::class)->group(function(){
         Route::get('/admin/all-brands', 'Index')->name('all-brands');
         Route::get('/admin/add-brand', 'AddBrand')->name('add-brand');
@@ -63,7 +79,7 @@ Route::middleware(['auth', 'role:admin'])->group(function () {
         Route::post('/admin/store-product', 'StoreProduct')->name('store-product');
         Route::get('/admin/edit-product/{id}', 'EditProduct')->name('edit-product');
         Route::get('/admin/delete-product/{id}', 'DeleteProduct')->name('delete-product');
-        Route::post('/admin/update-product', 'UpdateProduct')->name('update-product'); 
+        Route::post('/admin/update-product', 'UpdateProduct')->name('update-product');
     });
 
     Route::controller(StocksController::class)->group(function(){
@@ -75,14 +91,14 @@ Route::middleware(['auth', 'role:admin'])->group(function () {
         Route::get('/admin/edit-stock/{id}', 'EditStock')->name('edit-stock');
         Route::post('/admin/update-stocks', 'UpdateStock')->name('update-stock');
         Route::get('/admin/delete-stock/{id}', 'DeleteStock')->name('delete-stock');
-        
+
     });
-    
+
     Route::controller(OrdersController::class)->group(function(){
         Route::get('/admin/completed-orders', 'Index')->name('completed-orders');
         Route::get('/admin/order-confirmations', 'OrderConfirmations')->name('order-confirmations');
     });
-    
+
 });
 
 

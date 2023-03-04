@@ -39,8 +39,8 @@ class StocksController extends Controller
         
         $image = $request->file('stock_img');
         $img_name = hexdec(uniqid()).'.'. $image->getClientOriginalExtension();
-        $request->stock_img->move(public_path('upload'), $img_name);
-        $img_url = 'upload/' . $img_name;
+        $request->stock_img->move(public_path('upload/stocks/'), $img_name);
+        $img_url = 'upload/stocks/' . $img_name;
 
 
         $brand_id = $request->brand_id;
@@ -58,6 +58,7 @@ class StocksController extends Controller
             'quantity' => $request->quantity,
             'stock_desc' => $request->stock_desc,
             'stock_img' => $img_url,
+            'slug' => strtolower(str_replace(' ', '-', $product_name)),
         ]);
 
         Brands::where('id', $brand_id)->increment('stock_count', 1);

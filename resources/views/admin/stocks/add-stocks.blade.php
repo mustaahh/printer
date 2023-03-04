@@ -53,7 +53,7 @@
                                 <div class="col-sm-10">
                                     <div class="input-group input-group-merge">
                                         <input type="number" id="price" class="form-control"
-                                            placeholder="Printer's price in rupiah" name="price" />
+                                            placeholder="Printer's price in dollars" name="price" />
                                     </div>
                                 </div>
                             </div>
