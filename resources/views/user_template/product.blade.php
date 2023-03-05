@@ -1,10 +1,13 @@
 @extends('user_template.layouts.sneat')
+@section('page_title')
+    Printly | Product Details
+@endsection
 @section('main-content')
     <div class="container-xxl flex-grow-1 container-p-y">
         <div class="row mb-5">
             <div class="col-md">
                 <div class="card mb-3">
-                    <div class="row g-0">   
+                    <div class="row g-0">
                         <div class="col-md-5">
                             <img class="card-img  m-4" src="{{ asset($single_product->stock_img) }}"
                                 alt="Card image" />

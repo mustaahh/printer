@@ -15,6 +15,10 @@ class HomeController extends Controller
         return view('user_template.home', compact('all_stocks', 'brands'));
     }
 
+    public function Home () {
+        return view('welcome');
+    }
+
 
 
 

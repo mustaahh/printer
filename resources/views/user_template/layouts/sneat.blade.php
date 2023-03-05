@@ -30,10 +30,10 @@
     <title> @yield('page_title') </title>
 
     <meta name="description" content="" />
-    
+
 
     <!-- Favicon -->
-    <link rel="icon" type="image/x-icon" href="{{ asset('dashboard/assets/img/favicon/favicon.ico') }}" />
+    <link rel="icon" type="image/png" href="{{ asset('dashboard/assets/img/favicon/printly-icon.png') }}" />
 
     <!-- Fonts -->
     <link rel="preconnect" href="https://fonts.googleapis.com" />
@@ -82,7 +82,7 @@
             <i class="bx bx-chevron-left bx-sm align-middle"></i>
           </a>
         </div>
-        
+
         <button
           class="navbar-toggler"
           type="button"
@@ -107,7 +107,7 @@
               >
                 Best printer shop in town!
               </a>
-              
+
               <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
                 <li><a class="dropdown-item" href="javascript:void(0)">Brand</a></li>
               </ul>
@@ -121,13 +121,13 @@
             <li class="nav-item">
               <a class="nav-link" href="{{ route('home-products') }}">Products</a>
             </li>
-            
+
           </ul>
 
-              
-          <div class="navbar-nav"> 
+
+          <div class="navbar-nav">
             <div class="nav-item d-flex align-items-center">
-              <label for="searchbar">  
+              <label for="searchbar">
                 <i class="bx bx-search fs-4 lh-0 m-2"></i>
               </label>
               <input
@@ -139,15 +139,29 @@
               />
             </div>
           </div>
-          <button type="button" class="btn btn-info m-2">Sign In</button>
-          <button type="button" class="btn btn-outline-info m-2">Sign Up</button>
+          @if (Route::has('login'))
+                <div class="">
+                    @auth
+                        `<a href="{{ route('add-to-cart') }}" class="btn btn-primary"><i class='bx bxs-cart' ></i></a>
+                        <a href="{{ url('/user-profile') }}" class="btn btn-info m-2">Dashboard</a>
+                    @else
+                        <a href="{{ route('login') }}" class="btn btn-info m-2">Log in</a>
+
+                        @if (Route::has('register'))
+                            <a href="{{ route('register') }}" class="btn btn-outline-info m-2">Register</a>
+                        @endif
+                    @endauth
+                </div>
+            @endif
+          {{-- <a class="btn btn-info m-2" href="{{ route('login') }}">Sign In</a>
+          <button type="button" class="btn btn-outline-info m-2">Sign Up</button> --}}
         </div>
       </div>
     </nav>
 
     <div class="content-wrapper">
               @yield('main-content')
-  
+
             </div>
 
 
@@ -187,7 +201,7 @@
     <!-- Place this tag in your head or just before your close body tag. -->
     <script async defer src="https://buttons.github.io/buttons.js"></script>
     <script src="https://cdn.datatables.net/1.13.2/js/jquery.dataTables.min.js"></script>
-    <script type="text/javascript">
+    {{-- <script type="text/javascript">
       $(document).ready( function () {
         $('.table').DataTable();
         $('#searchbar').on('keyup', function () {
@@ -195,6 +209,6 @@
           table.search(this.value).draw();
         });
         });
-    </script>
+    </script> --}}
   </body>
 </html>

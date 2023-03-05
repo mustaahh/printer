@@ -3,12 +3,15 @@
 namespace App\Http\Controllers\Admin;
 
 use App\Http\Controllers\Controller;
+use App\Models\Order;
 use Illuminate\Http\Request;
 
 class OrdersController extends Controller
 {
     public function Index () {
-        return view ('admin.orders.completed-orders');
+        $pending_orders = Order::where('status', 'pending')->latest()->get();
+
+        return view ('admin.orders.pending-orders', compact('pending_orders'));
     }
 
     public function OrderConfirmations () {

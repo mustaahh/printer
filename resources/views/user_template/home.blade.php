@@ -1,4 +1,7 @@
 @extends('user_template.layouts.sneat')
+@section('page_title')
+    Printly | Home
+@endsection
 @section('main-content')
     <div class="container-xxl flex-grow-1 container-p-y">
         <h4 class="fw-bold py-3 mb-4" id="#brands"><span class="text-muted fw-light">Printly/</span> All Brands</h4>

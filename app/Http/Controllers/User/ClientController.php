@@ -6,6 +6,8 @@ use App\Http\Controllers\Controller;
 use App\Models\Brands;
 use App\Models\Stocks;
 use App\Models\Cart;
+use App\Models\ShippingInfo;
+use App\Models\Order;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Http\Request;
 
@@ -16,7 +18,7 @@ class ClientController extends Controller
         $stocks = Stocks::where('brand_id', $id)->latest()->get();
         return view ('user_template.brand', compact('brands', 'stocks'));
     }
-    
+
     public function SingleProduct ($id) {
         $single_product = Stocks::findOrFail($id);
         return view ('user_template.product', compact('single_product'));
@@ -47,20 +49,65 @@ class ClientController extends Controller
         return redirect('add-to-cart')->with('message', 'Item Removed From Cart Successfuly!');
     }
 
+    public function GetShippingAddress () {
+        return view('user_template.shipping-address');
+    }
+
+    public function AddShippingAddress (Request $request) {
+        ShippingInfo::insert([
+            'user_id' => Auth::id(),
+            'recipient_name' => $request->recipient_name,
+            'recipient_address' => $request->recipient_address,
+            'recipient_phone' => $request->recipient_phone,
+        ]);
+        return redirect('checkout')->with('message', 'Shipping Info Added Successfuly!');
+    }
+
     public function Checkout () {
-        return view('user_template.checkout');
+        $user_id = Auth::id();
+        $cart_items = Cart::where('user_id', $user_id)->get();
+        $shipping_address = ShippingInfo::where('user_id', $user_id)->first();
+        return view('user_template.checkout', compact('cart_items', 'shipping_address'));
+    }
+
+    public function PlaceOrder () {
+        $user_id = Auth::id();
+        $cart_items = Cart::where('user_id', $user_id)->get();
+        $shipping_address = ShippingInfo::where('user_id', $user_id)->first();
+
+        foreach($cart_items as $cart_item){
+            Order::insert([
+                'user_id' => $user_id,
+                'recipient_name' => $shipping_address->recipient_name,
+                'recipient_address' => $shipping_address->recipient_address,
+                'recipient_phone' => $shipping_address->recipient_phone,
+                'product_id' => $cart_item->product_id,
+                'quantity' => $cart_item->quantity,
+                'total_price' => $cart_item->price,
+            ]);
+
+            $id = $cart_item->id;
+            Cart::findOrFail($id)->delete();
+
+
+        }
+
+        ShippingInfo::where('user_id', $user_id)->first()->delete();
+
+        return redirect()->route('pending-orders')->with('message', 'Your Order Has Been Placed Successfully!');
     }
 
     public function UserProfile () {
-        return view('user_template.user-profile');
+        return view('user_template.user_profile.user-profile');
     }
 
     public function PendingOrders () {
-        return view('user_template.pending-orders');
+        $pending_orders = Order::where('status', 'pending')->latest()->get();
+        return view('user_template.user_profile.pending-orders', compact('pending_orders'));
     }
 
     public function History () {
-        return view('user_template.history');
+        return view('user_template.user_profile.history');
     }
 
 }

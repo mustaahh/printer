@@ -21,9 +21,9 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
-// Route::get('/', function () {
-//     return view('user_template.layouts.template');
-// });
+Route::get('/home', function () {
+    return view('welcome');
+});
 
 Route::controller(HomeController::class)->group(function () {
     Route::get('/', 'Index')->name('home');
@@ -31,6 +31,7 @@ Route::controller(HomeController::class)->group(function () {
     Route::get('/#best-sellers', 'Index')->name('home-best-sellers');
     Route::get('/#home-products', 'Index')->name('home-products');
 });
+
 Route::controller(ClientController::class)->group(function () {
     Route::get('/brand/{id}/{slug}', 'BrandPage')->name('brand-page');
     Route::get('/product-details/{id}/{slug}', 'SingleProduct')->name('single-product');
@@ -44,12 +45,15 @@ Route::middleware(['auth', 'role:user'])->group(function () {
     Route::get('/add-to-cart', 'AddToCart')->name('add-to-cart');
     Route::post('/add-product-to-cart/{id}', 'AddProductToCart')->name('add-product-to-cart');
     Route::get('/remove-cart-item/{id}', 'RemoveCartItem' )->name('remove-cart-item');
+    Route::get('/shipping-address', 'GetShippingAddress')->name('shipping-address');
+    Route::post('/add-shipping-address', 'AddShippingAddress')->name('add-shipping-address');
+    Route::post('/place-order', 'PlaceOrder')->name('place-order');
     Route::get('/checkout', 'Checkout')->name('checkout');
     Route::get('/user-profile', 'UserProfile')->name('user-profile');
     Route::get('/user-profile/pending-orders', 'PendingOrders')->name('pending-orders');
     Route::get('/user-profile/history', 'History')->name('history');
     });
-    
+
 });
 
 Route::get('/dashboard', function () {
@@ -95,8 +99,8 @@ Route::middleware(['auth', 'role:admin'])->group(function () {
     });
 
     Route::controller(OrdersController::class)->group(function(){
-        Route::get('/admin/completed-orders', 'Index')->name('completed-orders');
-        Route::get('/admin/order-confirmations', 'OrderConfirmations')->name('order-confirmations');
+        Route::get('/admin/pending-orders', 'Index')->name('admin-pending-orders');
+        Route::get('/admin/completed-orders', 'CompletedOrder')->name('completed-orders');
     });
 
 });

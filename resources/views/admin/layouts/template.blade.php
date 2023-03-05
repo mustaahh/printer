@@ -30,10 +30,10 @@
     <title> @yield('page_title') </title>
 
     <meta name="description" content="" />
-    
+
 
     <!-- Favicon -->
-    <link rel="icon" type="image/x-icon" href="{{ asset('dashboard/assets/img/favicon/favicon.ico') }}" />
+    <link rel="icon" type="image/png" href="{{ asset('dashboard/assets/img/favicon/printly-icon.png') }}" />
 
     <!-- Fonts -->
     <link rel="preconnect" href="https://fonts.googleapis.com" />
@@ -147,23 +147,24 @@
             </li>
             <li class="menu-header small text-uppercase"><span class="menu-header-text">Order Data</span></li>
             <!-- Cards -->
+            <li class="menu-item @yield('pending-orders')">
+                <a href="{{ route('admin-pending-orders') }}" class="menu-link">
+                  <i class="menu-icon tf-icons bx bx-user-check"></i>
+                  <div data-i18n="Basic">Pending Orders</div>
+                </a>
+              </li>
             <li class="menu-item @yield('completed-orders')">
               <a href="{{ route('completed-orders') }}" class="menu-link">
                 <i class="menu-icon tf-icons bx bx-archive-in"></i>
                 <div data-i18n="Basic">Completed Order</div>
               </a>
             </li>
-            <li class="menu-item @yield('order-confirmations')">
-              <a href="{{ route('order-confirmations') }}" class="menu-link">
-                <i class="menu-icon tf-icons bx bx-user-check"></i>
-                <div data-i18n="Basic">Order Confirmation</div>
-              </a>
-            </li>
-            
 
-    
-            
-            
+
+
+
+
+
           </ul>
         </aside>
         <!-- / Menu -->
@@ -200,7 +201,7 @@
 
               <ul class="navbar-nav flex-row align-items-center ms-auto">
                 <!-- Place this tag where you want the button to render. -->
-                
+
 
                 <!-- User -->
                 <li class="nav-item navbar-dropdown dropdown-user dropdown">
@@ -256,7 +257,7 @@
                       <form method="POST" action="{{ route('logout') }}">
                             @csrf
                       <span class="d-flex align-items-center align-middle">
-                      
+
                       <x-dropdown-link :href="route('logout')" onclick="event.preventDefault(); this.closest('form').submit();" style="color :#F55050">
                         <i class="bx bx-power-off me-2"></i>
                         <span class="flex-grow-1 align-middle" >Log Out</span>
@@ -274,16 +275,16 @@
           <!-- / Navbar -->
 
           <!-- Content wrapper -->
-          
+
             <!-- Content -->
             <div class="content-wrapper">
               @yield('content')
-  
+
             </div>
 
 
-            
-            
+
+
             <div class="content-backdrop fade"></div>
           </div>
           <!-- Content wrapper -->
