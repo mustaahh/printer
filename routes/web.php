@@ -42,16 +42,17 @@ Route::controller(ClientController::class)->group(function () {
 
 Route::middleware(['auth', 'role:user'])->group(function () {
     Route::controller(ClientController::class)->group(function () {
-    Route::get('/add-to-cart', 'AddToCart')->name('add-to-cart');
-    Route::post('/add-product-to-cart/{id}', 'AddProductToCart')->name('add-product-to-cart');
-    Route::get('/remove-cart-item/{id}', 'RemoveCartItem' )->name('remove-cart-item');
-    Route::get('/shipping-address', 'GetShippingAddress')->name('shipping-address');
-    Route::post('/add-shipping-address', 'AddShippingAddress')->name('add-shipping-address');
-    Route::post('/place-order', 'PlaceOrder')->name('place-order');
-    Route::get('/checkout', 'Checkout')->name('checkout');
-    Route::get('/user-profile', 'UserProfile')->name('user-profile');
-    Route::get('/user-profile/pending-orders', 'PendingOrders')->name('pending-orders');
-    Route::get('/user-profile/history', 'History')->name('history');
+        Route::get('/search', 'Search')->name('search');
+        Route::get('/add-to-cart', 'AddToCart')->name('add-to-cart');
+        Route::post('/add-product-to-cart/{id}', 'AddProductToCart')->name('add-product-to-cart');
+        Route::get('/remove-cart-item/{id}', 'RemoveCartItem' )->name('remove-cart-item');
+        Route::get('/shipping-address', 'GetShippingAddress')->name('shipping-address');
+        Route::post('/add-shipping-address', 'AddShippingAddress')->name('add-shipping-address');
+        Route::post('/place-order', 'PlaceOrder')->name('place-order');
+        Route::get('/checkout', 'Checkout')->name('checkout');
+        Route::get('/user-profile', 'UserProfile')->name('user-profile');
+        Route::get('/user-profile/pending-orders', 'PendingOrders')->name('pending-orders');
+        Route::get('/user-profile/history', 'History')->name('history');
     });
 
 });
@@ -100,6 +101,8 @@ Route::middleware(['auth', 'role:admin'])->group(function () {
 
     Route::controller(OrdersController::class)->group(function(){
         Route::get('/admin/pending-orders', 'Index')->name('admin-pending-orders');
+        Route::post('/admin/confirm-status', 'ConfirmStatus')->name('confirm-status');
+        Route::post('/admin/reject-status', 'RejectStatus')->name('reject-status');
         Route::get('/admin/completed-orders', 'CompletedOrder')->name('completed-orders');
     });
 

@@ -18,7 +18,7 @@
             <th>No</th>
             <th>Recipient Name</th>
             <th>Quantity</th>
-            <th>Price</th>
+            <th>Price Total</th>
             <th>Status</th>
         </tr>
     </thead>

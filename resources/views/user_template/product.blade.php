@@ -25,7 +25,14 @@
                                     @csrf
                                     <input type="hidden" value="{{ $single_product->id }}" name="stock_id">
                                     <input type="hidden" value="{{ $single_product->price }}" name="price">
-                                    <input type="number" class="form-control" min="1" placeholder="How many pcs do you want?" name="quantity" id="quantity">
+                                    <input type="number" class="form-control" min="1" placeholder="How many pcs do you want?" name="quantity" id="quantity" required>
+                                    @if (session()->has('error'))
+                                    <div class="alert alert-danger alert-dismissible fade show mt-2">
+                                        {{ session()->get('error') }}
+                                        <button type="button" class="btn-close text-end" data-bs-dismiss="alert"
+                                            aria-label="Close"></button>
+                                    </div>
+                                @endif
                                     <input type="submit" class="btn btn-info mt-2" value="Add to cart">
                                 </form>
                             </div>

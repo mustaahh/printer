@@ -13,6 +13,22 @@ use Illuminate\Http\Request;
 
 class ClientController extends Controller
 {
+    public function Search (Request $request) {
+        $search = '';
+        if ($request->search) {
+            $search = $request->search;
+        }
+
+        if ($request->search == '') {
+            return redirect()->route('home');
+        }
+
+        $data = Stocks::where('product_name', 'like', '%'. $search .'%')
+                ->orWhere('stock_desc', 'like', '%'. $search .'%')->get();
+
+        return view('user_template.search', compact('data', 'search'));
+    }
+
     public function BrandPage ($id) {
         $brands = Brands::findOrFail($id);
         $stocks = Stocks::where('brand_id', $id)->latest()->get();
@@ -35,6 +51,12 @@ class ClientController extends Controller
         $product_price = $request->price;
         $quantity = $request->quantity;
         $price_total = $product_price * $quantity;
+
+        $stock = Stocks::find($request->stock_id);
+        $count = $stock->quantity - $quantity;
+        if ($count < 0) {
+            return redirect()->back()->with('error', "Stocks Unavailable");
+        }
         Cart::insert([
             'product_id' => $request->stock_id,
             'user_id' => Auth::id(),
@@ -86,11 +108,14 @@ class ClientController extends Controller
                 'total_price' => $cart_item->price,
             ]);
 
+            $data = Stocks::find($cart_item->product_id);
+            $data->quantity = $data->quantity - $cart_item->quantity;
+            $data->update();
+
             $id = $cart_item->id;
             Cart::findOrFail($id)->delete();
-
-
         }
+
 
         ShippingInfo::where('user_id', $user_id)->first()->delete();
 
@@ -107,7 +132,8 @@ class ClientController extends Controller
     }
 
     public function History () {
-        return view('user_template.user_profile.history');
+        $history_order = Order::where('status', '=','success')->orWhere('status', '=', 'reject')->latest()->get();
+        return view('user_template.user_profile.history', compact('history_order'));
     }
 
 }

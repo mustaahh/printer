@@ -105,7 +105,7 @@
                 data-bs-toggle="dropdown"
                 aria-expanded="false"
               >
-                Best printer shop in town!
+
               </a>
 
               <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
@@ -126,16 +126,17 @@
 
 
           <div class="navbar-nav">
-            <div class="nav-item d-flex align-items-center">
-              <label for="searchbar">
+            <form method="GET" action="{{ route("search") }}" class="nav-item d-flex align-items-center">
+              <button type="submit" class="btn">
                 <i class="bx bx-search fs-4 lh-0 m-2"></i>
-              </label>
+              </button>
               <input
                 type="text"
                 class="form-control border-0 shadow-none"
                 placeholder="Search..."
                 aria-label="Search..."
                 id="searchbar"
+                name="search"
               />
             </div>
           </div>
@@ -166,7 +167,7 @@
 
 
     <!-- Footer -->
-    <footer class="content-footer footer bg-footer-theme">
+    <footer class="content-footer footer bg-footer-theme m-2">
       <div class="container-xxl d-flex flex-wrap justify-content-center py-2 flex-md-row flex-column">
         <div class="mb-2 mb-md-0">
           © Copyright

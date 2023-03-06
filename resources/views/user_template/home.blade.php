@@ -18,54 +18,26 @@
         </div>
 
 
-        <h4 class="fw-bold py-3 mb-4 " id="best-sellers"><span class="text-muted fw-light">Product/</span> Best Sellers
-        </h4>
+        <h4 class="fw-bold py-3 mb-4 " id="best-sellers"><span class="text-muted fw-light">Product/</span> Best Sellers</h4>
         <div class="row mb-5">
-            <div class="col-md-6 col-lg-4 mb-3">
-                <div class="card p-3 shadow-sm">
-                    <img src="{{ asset('dashboard/assets/img/elements/1.jpg') }}" class="img-fluid d-flex my-2 rounded"
-                        alt="">
-                    <h5 class="card-title mt-3 ">Epson L210</h5>
-                    <p class="card-text text-muted">Lorem ipsum dolor sit amet consectetur, adipisicing elit. Quos,
-                        nostrum.
-                    </p>
-                    <h4 class="text-info">Rp.200.000</h4>
-                    <button type="button" class="btn btn-info">Add</button>
-                    {{-- <div class="demo-inline-spacing">
-                            <button type="button" class="btn btn-info">Add</button>
-                        </div> --}}
+            @foreach ($best_sellers as $stock)
+                <div class="col-md-6 col-lg-4 mb-3">
+                    <div class="card p-3 shadow-sm">
+                        <img src="{{ asset($stock->stock_img) }}" class="img-fluid d-flex my-2 rounded" alt="">
+                        <div class="demo-inline-spacing">
+                            <span class="badge bg-label-primary">{{ $stock->brand_name }}</span>
+                        </div>
+                        <h5 class="card-title mt-3 ">{{ $stock->product_name }}</h5>
+                        <p class="card-text text-muted">{{ $stock->stock_desc }}</p>
+                        <h4 class="text-info">${{ $stock->price }}</h4>
+                        <a href="{{ route('single-product', [$stock->id, $stock->slug]) }}" class="btn btn-info">
+                        Buy Now
+                        </a>
+                    </div>
                 </div>
-            </div>
-            <div class="col-md-6 col-lg-4 mb-3">
-                <div class="card p-3 shadow-sm">
-                    <img src="{{ asset('dashboard/assets/img/elements/1.jpg') }}" class="img-fluid d-flex my-2 rounded"
-                        alt="">
-                    <h5 class="card-title mt-3 ">Epson L210</h5>
-                    <p class="card-text text-muted">Lorem ipsum dolor sit amet consectetur, adipisicing elit. Quos,
-                        nostrum.
-                    </p>
-                    <h4 class="text-info">Rp.200.000</h4>
-                    <button type="button" class="btn btn-info">Add</button>
-                    {{-- <div class="demo-inline-spacing">
-                            <button type="button" class="btn btn-info">Add</button>
-                        </div> --}}
-                </div>
-            </div>
-            <div class="col-md-6 col-lg-4 mb-3">
-                <div class="card p-3 shadow-sm">
-                    <img src="{{ asset('dashboard/assets/img/elements/1.jpg') }}" class="img-fluid d-flex my-2 rounded"
-                        alt="">
-                    <h5 class="card-title mt-3 ">Epson L210</h5>
-                    <p class="card-text text-muted">Lorem ipsum dolor sit amet consectetur, adipisicing elit. Quos,
-                        nostrum.
-                    </p>
-                    <h4 class="text-info">Rp.200.000</h4>
-                    <button type="button" class="btn btn-info">Add</button>
-                    {{-- <div class="demo-inline-spacing">
-                        <button type="button" class="btn btn-info">Add</button>
-                    </div> --}}
-                </div>
-            </div>
+            @endforeach
+
+
         </div>
 
         {{-- DISPLAY ALL PRODUCT FROM DATA BASE --}}

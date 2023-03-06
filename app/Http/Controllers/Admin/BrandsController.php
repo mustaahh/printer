@@ -20,13 +20,13 @@ class BrandsController extends Controller
     public function StoreBrand ( Request $request ) {
         $request->validate([
             'brand_name' => 'required|unique:brands',
-            
+
         ]);
 
         Brands::insert([
         'brand_name' => $request->brand_name,
 
-        'slug' => strtolower(str_replace(' ', '-', $request->brand_name)) ]); 
+        'slug' => strtolower(str_replace(' ', '-', $request->brand_name)) ]);
         return redirect()->route('all-brands')->with( 'message', 'Brand Added Successfully!' );
     }
 
@@ -45,7 +45,7 @@ class BrandsController extends Controller
         ]);
 
         Brands::findOrFail($brand_id)-> update([
-            'brand_name' => $request->brand_name,  
+            'brand_name' => $request->brand_name,
             'slug' => strtolower(str_replace(' ', '-', $request->brand_name))
 
         ]);
@@ -58,7 +58,7 @@ class BrandsController extends Controller
 
         return redirect()->route('all-brands')->with('message', 'Brand Deleted Successfully!');
     }
-    
+
 
 
 }

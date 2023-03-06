@@ -39,7 +39,7 @@
                                     <a href="{{ route('edit-stock-image', $stock->id) }}" class="btn btn-primary">Change</a>
                                 </td>
                                 <td>{{ $stock->price }}</td>
-                                <td>{{ $stock->stock_count }}</td>
+                                <td>{{ $stock->quantity }}</td>
                                 <td>
                                     <a href="{{ route('edit-stock', $stock->id) }}" class="btn btn-primary">Edit</a>
                                     <a href="{{ route('delete-stock', $stock->id) }}" class="btn btn-danger">Delete</a>

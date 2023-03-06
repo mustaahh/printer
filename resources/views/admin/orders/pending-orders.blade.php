@@ -13,7 +13,7 @@ Admin | Pending Orders
             <table class="table table-striped table-borderless">
               <thead>
                 <tr>
-                  <th>No</th>
+                  <th>Order Id</th>
                   <th>User Id</th>
                   <th>Shipping Information</th>
                   <th>Product Id</th>
@@ -26,7 +26,7 @@ Admin | Pending Orders
                 @foreach ( $pending_orders as $pending_order )
 
                 <tr>
-                  <td>{{ $loop->iteration }}</td>
+                  <td>{{ $pending_order->id }}</td>
                   <td>{{ $pending_order->user_id }}</td>
                   <td>
                     <div class="list-group list-group-flush">
@@ -42,7 +42,18 @@ Admin | Pending Orders
                   <td>{{ $pending_order->quantity }}</td>
                   <td class="text-info">${{ $pending_order->total_price }}</td>
                   <td>
-                    <a href="" class="btn btn-success">Confirm</a>
+                    <form action="{{ route('confirm-status') }}" method="post" class="mb-2" >
+                        @csrf
+                        <input type="hidden" name="id" value="{{ $pending_order->id }}">
+                        <input type="hidden" name="status" value="success">
+                        <button type="submit" name="confirm" class="btn btn-success">Confirm</button>
+                    </form>
+                    <form action="{{ route('reject-status') }}" method="post" >
+                        @csrf
+                        <input type="hidden" name="id" value="{{ $pending_order->id }}">
+                        <input type="hidden" name="status" value="reject">
+                        <button type="submit" name="confirm" class="btn btn-danger">Reject</button>
+                    </form>
                   </td>
                 </tr>
                 {{-- style="background-color: #F55050;" --}}
