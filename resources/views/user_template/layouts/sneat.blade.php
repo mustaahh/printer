@@ -70,7 +70,7 @@
 
   <body>
     <!-- Basic -->
-    <nav class="navbar navbar-expand-lg navbar-light bg-white p-3 ">
+    <nav class="navbar navbar-expand-lg navbar-light bg-white p-3 sticky-top">
       <div class="container-fluid">
         <div class="app-brand demo m-2">
           <a href="{{ route('home') }}" class="app-brand-link">
@@ -126,7 +126,7 @@
 
 
           <div class="navbar-nav">
-            <form method="GET" action="{{ route("search") }}" class="nav-item d-flex align-items-center">
+            <form method="GET" action="{{ route('search') }}" class="nav-item d-flex align-items-center">
               <button type="submit" class="btn">
                 <i class="bx bx-search fs-4 lh-0 m-2"></i>
               </button>
@@ -138,19 +138,20 @@
                 id="searchbar"
                 name="search"
               />
+            </form>
             </div>
           </div>
           @if (Route::has('login'))
                 <div class="">
                     @auth
-                        `<a href="{{ route('add-to-cart') }}" class="btn btn-primary"><i class='bx bxs-cart' ></i></a>
-                        <a href="{{ url('/user-profile') }}" class="btn btn-info m-2">Dashboard</a>
-                    @else
-                        <a href="{{ route('login') }}" class="btn btn-info m-2">Log in</a>
+                                `<a href="{{ route('add-to-cart') }}" class="btn btn-primary"><i class='bx bxs-cart' ></i></a>
+                                <a href="{{ url('/user-profile') }}" class="btn btn-info m-2">Dashboard</a>
+@else
+    <a href="{{ route('login') }}" class="btn btn-info m-2">Log in</a>
 
-                        @if (Route::has('register'))
-                            <a href="{{ route('register') }}" class="btn btn-outline-info m-2">Register</a>
-                        @endif
+                                @if (Route::has('register'))
+    <a href="{{ route('register') }}" class="btn btn-outline-info m-2">Register</a>
+    @endif
                     @endauth
                 </div>
             @endif
@@ -172,9 +173,9 @@
         <div class="mb-2 mb-md-0">
           © Copyright
           <script>
-            document.write(new Date().getFullYear());
+              document.write(new Date().getFullYear());
           </script>, made with ❤️ by
-          <a href="github.com/mustaahh" target="_blank" class="footer-link fw-bolder">Mustaahh</a>
+          <a href="" target="" class="footer-link fw-bolder">Mustaahh <span class="text-muted">(Ft Masday Racing)</span></a>
         </div>
       </div>
     </footer>

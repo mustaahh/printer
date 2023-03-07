@@ -149,16 +149,27 @@
             <!-- Cards -->
             <li class="menu-item @yield('pending-orders')">
                 <a href="{{ route('admin-pending-orders') }}" class="menu-link">
-                  <i class="menu-icon tf-icons bx bx-user-check"></i>
+                  <i class="menu-icon tf-icons bx bx-loader-circle"></i>
                   <div data-i18n="Basic">Pending Orders</div>
                 </a>
               </li>
-            <li class="menu-item @yield('completed-orders')">
-              <a href="{{ route('completed-orders') }}" class="menu-link">
-                <i class="menu-icon tf-icons bx bx-archive-in"></i>
-                <div data-i18n="Basic">Completed Order</div>
+            <li class="menu-item @yield('rejected-orders')">
+              <a href="{{ route('rejected-orders') }}" class="menu-link">
+                <i class="menu-icon tf-icons bx bx-user-x"></i>
+                <div data-i18n="Basic">Rejected Order</div>
               </a>
             </li>
+            <li class="menu-item @yield('completed-orders')">
+              <a href="{{ route('completed-orders') }}" class="menu-link">
+                <i class="menu-icon tf-icons bx bx-user-check"></i>
+                <div data-i18n="Basic" >Completed Order</div>
+              </a>
+            </li >
+            <li class="menu-item">
+              <div class="menu-link">
+                <div data-i18n="Basic" ></div>
+              </div>
+            </li >
 
 
 
@@ -221,35 +232,18 @@
                           </div>
                           <div class="flex-grow-1">
                             <span class="fw-semibold d-block">{{ Auth::user()->name }}</span>
-                            <small class="text-muted">Admin</small>
+                            <small class="text-muted">{{ Auth::user()->email }}</small>
                           </div>
                         </div>
                       </a>
                     </li>
-                    <li>
-                      <div class="dropdown-divider"></div>
-                    </li>
-                    <li>
+
+                    {{-- <li>
                       <a class="dropdown-item" href="{{ route('profile.edit') }}">
                         <i class="bx bx-user me-2"></i>
                         <span class="align-middle">My Profile</span>
                       </a>
-                    </li>
-                    <li>
-                      <a class="dropdown-item" href="#">
-                        <i class="bx bx-cog me-2"></i>
-                        <span class="align-middle">Settings</span>
-                      </a>
-                    </li>
-                    <li>
-                      <a class="dropdown-item" href="#">
-                        <span class="d-flex align-items-center align-middle">
-                          <i class="flex-shrink-0 bx bx-credit-card me-2"></i>
-                          <span class="flex-grow-1 align-middle">Billing</span>
-                          <span class="flex-shrink-0 badge badge-center rounded-pill bg-danger w-px-20 h-px-20">4</span>
-                        </span>
-                      </a>
-                    </li>
+                    </li> --}}
                     <li>
                       <div class="dropdown-divider"></div>
                     </li>

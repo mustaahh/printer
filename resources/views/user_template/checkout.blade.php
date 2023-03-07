@@ -12,26 +12,53 @@
                             <div class="card-body">
                                 <h5 class="card-title fw-bold mb-4">Your Product Will Send At -</h5>
                                 <div class="list-group list-group-flush">
+
                                     <p class="list-group-item"><span class="fw-bold">Recipient</span>
                                         : {{ $shipping_address->recipient_name }}</p>
                                     <p class="list-group-item"><span class="fw-bold">Address</span> :
                                         {{ $shipping_address->recipient_address }}</p>
                                     <p class="list-group-item"><span class="fw-bold">Phone
                                             Number</span> : {{ $shipping_address->recipient_phone }}</p>
+
+
+
+                                    {{-- @if ($shipping_address)
+                                        <div class="misc-wrapper text-center">
+                                            <h2 class="mb-2 mx-2">"{{ $search }}" Not Found :(</h2>
+                                            <p class="mb-4 mx-2">Oops! 😖 The Product or descriptions you search was not
+                                                found on this server.</p>
+                                            <a href="{{ route('home') }}" class="btn btn-primary">Back to home</a>
+                                            <div class="mt-3">
+                                                <img src=" {{ asset('dashboard/assets/img/illustrations/page-misc-error-light.png') }}"
+                                                    alt="page-misc-error-light" width="500" class="img-fluid"
+                                                    data-app-dark-img="illustrations/page-misc-error-dark.png"
+                                                    data-app-light-img="illustrations/page-misc-error-light.png" />
+                                            </div>
+                                        </div>
+                                    @else
+                                    <p class="list-group-item"><span class="fw-bold">Recipient</span>
+                                        : {{ $shipping_address->recipient_name }}</p>
+                                    <p class="list-group-item"><span class="fw-bold">Address</span> :
+                                        {{ $shipping_address->recipient_address }}</p>
+                                    <p class="list-group-item"><span class="fw-bold">Phone
+                                            Number</span> : {{ $shipping_address->recipient_phone }}</p>
+
+                                    @endif --}}
+
                                 </div>
                                 <div class="d-flex flex-row bd-highlight ">
 
 
-                            <form action="{{ route('place-order') }}" method="POST" class="m-2">
-                                @csrf
-                                <input type="submit" value="Place Order" class="btn btn-primary">
-                            </form>
-                            <form action="" method="POST" class="m-2">
-                                @csrf
-                                <input type="submit" value="Cancel Order" class="btn btn-danger">
-                            </form>
-                        </div>
-                        </div>
+                                    <form action="{{ route('place-order') }}" method="POST" class="m-2">
+                                        @csrf
+                                        <input type="submit" value="Place Order" class="btn btn-primary">
+                                    </form>
+                                    <form action="{{ route('cancel-order') }}" method="GET" class="m-2">
+                                        @csrf
+                                        <input type="submit" value="Cancel Order" class="btn btn-danger">
+                                    </form>
+                                </div>
+                            </div>
                         </div>
                         <div class="col-md-8">
                             <div class="card-body">
@@ -73,8 +100,12 @@
                                         <td></td>
                                         <td></td>
                                         <td></td>
-                                        <td><h4 class="fw-bold m-2 p-2">TOTAL</h4></td>
-                                        <td><h4 class="fw-bold text-info m-2 p-2">${{ $total }}</h4></td>
+                                        <td>
+                                            <h4 class="fw-bold m-2 p-2">TOTAL</h4>
+                                        </td>
+                                        <td>
+                                            <h4 class="fw-bold text-info m-2 p-2">${{ $total }}</h4>
+                                        </td>
                                     </tr>
                                 </tbody>
                             </table>

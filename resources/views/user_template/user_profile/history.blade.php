@@ -34,7 +34,7 @@
                     @if ($pending_order->status == 'success')
                         <span class="badge bg-label-success">{{ $pending_order->status}}</span>
                     @else
-                        <span class="badge bg-label-danger">{{ $pending_order->status}}</span>
+                        <span class="badge bg-label-danger">REJECTED</span>
                     @endif
                 </td>
             </tr>

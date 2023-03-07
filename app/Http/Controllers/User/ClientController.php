@@ -122,17 +122,26 @@ class ClientController extends Controller
         return redirect()->route('pending-orders')->with('message', 'Your Order Has Been Placed Successfully!');
     }
 
+    public function CancelOrder() {
+        $user_id = Auth::id();
+        ShippingInfo::where('user_id', $user_id)->first()->delete();
+
+        return redirect()->route('home');
+    }
+
     public function UserProfile () {
         return view('user_template.user_profile.user-profile');
     }
 
     public function PendingOrders () {
-        $pending_orders = Order::where('status', 'pending')->latest()->get();
+        $pending_orders = Order::where('status', 'pending')->where('user_id', '=', Auth::user()->id)->latest()->get();
         return view('user_template.user_profile.pending-orders', compact('pending_orders'));
     }
 
     public function History () {
-        $history_order = Order::where('status', '=','success')->orWhere('status', '=', 'reject')->latest()->get();
+        $history_order = Order::where('user_id', '=', Auth::user()->id)->where(function ($args) {
+            $args->where('status', '=', 'reject')->orWhere('status', '=', 'success');
+        })->latest()->get();
         return view('user_template.user_profile.history', compact('history_order'));
     }
 

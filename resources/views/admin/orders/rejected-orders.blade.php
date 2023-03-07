@@ -1,13 +1,13 @@
 @extends('admin.layouts.template')
 
 @section('page_title')
-Admin | Completed Orders
+Admin | Rejected Orders
 @endsection
-@section('completed-orders', 'active')
+@section('rejected-orders', 'active')
 
 @section('content')
 <div class="container-xxl flex-grow-1 container-p-y">
-    <h4 class="fw-bold py-3 mb-4"><span class="text-muted fw-light">Page/</span> Completed Orders</h4>
+    <h4 class="fw-bold py-3 mb-4"><span class="text-muted fw-light">Page/</span> Rejected Orders</h4>
     <div class="card">
         <div class="table-responsive m-4">
             <table class="table table-striped table-borderless">
@@ -18,12 +18,12 @@ Admin | Completed Orders
                   <th>Shipping Information</th>
                   <th>Product Id</th>
                   <th>Quantitiy</th>
-                  <th>Total Paid</th>
+                  <th>Total</th>
                   <th>Status</th>
                 </tr>
               </thead>
               <tbody>
-                @foreach ( $completed_orders as $pending_order )
+                @foreach ( $rejected_orders as $pending_order )
 
                 <tr>
                   <td>{{ $pending_order->id }}</td>
@@ -42,7 +42,7 @@ Admin | Completed Orders
                   <td>{{ $pending_order->quantity }}</td>
                   <td class="text-info">${{ $pending_order->total_price }}</td>
                   <td>
-                    <span class="badge bg-label-success">{{ $pending_order->status}}</span>
+                    <span class="badge bg-label-danger">{{ $pending_order->status}}ed</span>
                   </td>
                 </tr>
                 {{-- style="background-color: #F55050;" --}}

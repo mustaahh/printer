@@ -4,7 +4,7 @@
 @endsection
 @section('main-content')
     <div class="container-xxl flex-grow-1 container-p-y">
-        <h4 class="fw-bold py-3 mb-4" id="#brands"><span class="text-muted fw-light">Printly/</span> All Brands</h4>
+        <h4 class="fw-bold py-3 mb-4" id="brands"><span class="text-muted fw-light">Printly/</span> All Brands</h4>
         <div class="row mb-5">
             @foreach ($brands as $brand)
                 <div class="col-md-6 col-lg-2 m-1">
